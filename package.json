@@ -1,6 +1,6 @@
 {
   "name": "cloneengine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple tool for cloning database tables; from Postgres to Oracle",
   "author": {
     "name"  :"David Maciejewski",

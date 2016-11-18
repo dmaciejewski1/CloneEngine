@@ -1,0 +1,158 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/dmacieje/node/v6.9.1/bin/node',
+1 verbose cli   '/Users/dmacieje/node/v6.9.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.8
+3 info using node@v6.9.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/dmacieje/publish/CloneEngine',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/dmacieje/.npm/cloneengine/0.0.1/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/dmacieje/.npm correctMkdir not in flight; initializing
+10 info lifecycle cloneengine@0.0.1~prepublish: cloneengine@0.0.1
+11 silly lifecycle cloneengine@0.0.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/dmacieje/.npm/cloneengine/0.0.1/package.tgz',
+12 verbose tar pack   '/Users/dmacieje/publish/CloneEngine' ]
+13 verbose tarball /Users/dmacieje/.npm/cloneengine/0.0.1/package.tgz
+14 verbose folder /Users/dmacieje/publish/CloneEngine
+15 verbose addLocalTarball adding from inside cache /Users/dmacieje/.npm/cloneengine/0.0.1/package.tgz
+16 verbose correctMkdir /Users/dmacieje/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd cloneengine@0.0.1
+18 verbose afterAdd /Users/dmacieje/.npm/cloneengine/0.0.1/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/dmacieje/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/dmacieje/.npm/cloneengine/0.0.1/package/package.json written
+21 silly publish { name: 'cloneengine',
+21 silly publish   version: '0.0.1',
+21 silly publish   description: 'A simple tool for cloning database tables; from Postgres to Oracle',
+21 silly publish   author: { name: 'David Maciejewski', email: 'dmaciejewski1@gmail.com' },
+21 silly publish   main: 'app.js',
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/dmaciejewski1/CloneEngine.git' },
+21 silly publish   license: 'MIT',
+21 silly publish   keywords:
+21 silly publish    [ 'data',
+21 silly publish      'database',
+21 silly publish      'Db',
+21 silly publish      'DB',
+21 silly publish      'db',
+21 silly publish      'layer',
+21 silly publish      'node',
+21 silly publish      'warehouse',
+21 silly publish      'information',
+21 silly publish      'transaction',
+21 silly publish      'metrics',
+21 silly publish      'connect',
+21 silly publish      'connection',
+21 silly publish      'connectivity',
+21 silly publish      'business',
+21 silly publish      'mine',
+21 silly publish      'mining',
+21 silly publish      'SQL',
+21 silly publish      'PLSQL',
+21 silly publish      'PL/SQL',
+21 silly publish      'select',
+21 silly publish      'insert',
+21 silly publish      'statements',
+21 silly publish      'query',
+21 silly publish      'queries',
+21 silly publish      'querying',
+21 silly publish      'clauses',
+21 silly publish      'ETL',
+21 silly publish      'client',
+21 silly publish      'add-on',
+21 silly publish      'API',
+21 silly publish      'web-API',
+21 silly publish      'webAPI',
+21 silly publish      'plugin',
+21 silly publish      'plug-in',
+21 silly publish      'tool',
+21 silly publish      'driver',
+21 silly publish      'library',
+21 silly publish      'module',
+21 silly publish      'oracledb',
+21 silly publish      'oracle',
+21 silly publish      'ora',
+21 silly publish      'OCI',
+21 silly publish      '10g',
+21 silly publish      '11g',
+21 silly publish      '12c',
+21 silly publish      'postgres',
+21 silly publish      'pg' ],
+21 silly publish   dependencies: { pg: '^6.1.0', oracledb: '^1.11.0' },
+21 silly publish   readme: '# CloneEngine\nA tool for cloning database tables; from Postgres into Oracle\n\n### Summary:\n  - Cast one or multiple tables (from a Postgres source) as comparable Oracle\n  Tables (or rebuild existing ones). Cloning Operations are run in-memory,\n  and can be configured to be run asynchronously or synchronously.\n\n### Usage:\n  - This module is purposed to clone SMALLER data tables from within a Postgres\n  database environment into an Oracle database environment. The process used\n  does not write to file, but rather stores entire tables in memory while\n  offloading the data into Oracle. Size your cloning operations accordingly.\n  Know the sizes of your tables versus what memory resources are available to\n  the system running this module versus how many cloning operations are being\n  called at run-time before proceeding. As these operations are done in-memory,\n  it may be necessary to run only one cloning operation at a time (i.e.\n  synchronously rather than asynchronously).\n\n### Limitations:\n  - As a guide, expect a simple laptop to handle realistically between 2 to 10\n  Gb of data (that being the total amount of data to be cloned during\n  run-time event) in a timely manner. Needless to say, a more robust system\n  could handle much more than that.\n  - While CloneEngine tries to be responsible handling database connection\n  closures, keep in mind the more cloning operations running asynchronously,\n  the more database connections that are opened against a database. Each\n  database has limits with the amount of connections that it can have open at\n  one time. As CloneEngine offloads data, database connections will remain open\n  per cloning operation (and most likely for some time) until the data\n  offloading process is complete for that operation. Also keep in mind that\n  connection time can quickly increase as resources are stretched handling larger\n  operations asynchronously.\n\n### Requirements:\n  - Oracle Instant Client installed and configured on local machine\n\n### Add-ons:\n  - CloneLogger: Create and Maintain Log Tables for the CloneEngine Module\n  - https://www.npmjs.com/package/clonelogger\n\n### Data Type Conversions:\n\n  - Currently resolves the following Postgres data types to the following Oracle\n  Data Types\n\n\n  | Postgres Data Type | Oracle Data Type  |\n  |--------------------|-------------------|\n  |       varchar      |     varchar2      |\n  |       numeric      |      number       |\n  |        int4        |     integer       |\n  |      timestamp     |     varchar2      |\n  |        bool        |     varchar2      |\n  |        text        |     varchar2      |\n\n### Message/Feedback Emitters:\n\n##### Message Emitter Types\n\n|     Type      |                     Behavior                          | Category |\n|---------------|-------------------------------------------------------|----------|\n|    start      | Emits on start only                                   | activity |\n|  connection   | Emits when connection is opened or closed             | activity |\n| rowsToProcess | Emits the row count of the table to be cloned         | activity |\n|   process     | Emits when data is being processed                    | activity |\n|  countsMatch  | Emits true if source and destination row counts match | activity |\n|    finish     | Emits on finish only                                  | activity |\n|   operation   | Emits a summary of operation only                     | summary  |\n|    ERROR!     | Emits when errors occur                               | activity |\n\n##### Activity Messages\n\n|  Emitter Property  |                         Property Description                                   |\n|--------------------|--------------------------------------------------------------------------------|\n|     activityId     | Operation step unique ID                                                       |\n|     operation      | Operation name                                                                 |\n|    operationId     | Operation unique ID                                                            |\n|      msgType       | Operation message type (start, connection, process, finish, operation, ERROR!) |\n|       step         | Operation step number                                                          |\n|       time         | Operation ISO formatted timestamp                                              |\n|    description     | Operation description                                                          |\n\n\n### Quick Start:\n#### *A) Oracle Instant Client Download*\n1. Download the following **TWO** Oracle Instant Client Packages (here: http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html ). Please make sure to download the correct packages for your system architecture (i.e. 64 bit vs 32 bit)\n\n    * **Instant Client Package - Basic or Basic Lite**: Contains files required to run OCI, OCCI, and JDBC-OCI applications\n\n    * **Instant Client Package - SDK**: Contains additional header files and an example makefile for developing Oracle applications with Instant Client\n\n#### *B) Oracle Instant Client Installation and Configuration (this example procedure is for Mac OS X 64bit ONLY)*\nFrom a terminal window:\n\n1) Unzip your Oracle Instant Client files to ```~/oracle```\n```bash\nunzip instantclient-basic-macos.x64-12.1.0.2.0.zip -d ~/oracle\nunzip instantclient-sdk-macos.x64-12.1.0.2.0.zip -d ~/oracle\n```\n2) Update your .bashrc file by appending and saving the following block of code:\n```bash\n##### Oracle Instant Client 12.1 #####\nexport OCI_HOME=~/oracle/instantclient_12_1\nexport OCI_LIB_DIR=$OCI_HOME\nexport OCI_INC_DIR=$OCI_HOME/sdk/include\nexport OCI_INCLUDE_DIR=$OCI_HOME/sdk/include\nexport DYLD_LIBRARY_PATH=$OCI_LIB_DIR\n```\n3) Create the following symbolic links from within your Instant Client directory (e.g. /oracle/instantclient_12_1):\n```bash\nln -s ~/oracle/instantclient_12_1/libclntsh.dylib.12.1 ~/oracle/instantclient_12_1/libclntsh.dylib\nln -s ~/oracle/instantclient_12_1/libocci.dylib.12.1 ~/oracle/instantclient_12_1/libocci.dylib\n```\n4) Restart your Terminal application OR type the following ```source ~/.bashrc```\n\n#### *C) CloneEngine Installation*\n```\nnpm install cloneengine\n```\n\n\n#### *D) Run CloneEngine Operations*\n```js\n"use strict";\nvar CloneEngine = require(\'cloneengine\');\n/////////////////////////////////////////// CLONE OPERATION OPTIONS /////////////////////////////////////////\n\n//----Source Database Connection Setup----\nconst SOURCE_DB = {\n        dbMake          : \'postgres\',\n        database        : \'myPostgresDb\',\n        user            : \'me\',\n        password        : \'myPassWord\',\n        host            : \'my.db.com\'\n      };\n\n\n//----Destination Database Connection Setup----\nconst DESTINATION_DB = {// must have read, write, delete permissions\n        dbMake          : \'oracle\',\n        database        : \'myOracleDb\',\n        user            : \'me\',\n        password        : \'myPassWord\',\n        host            : \'myother.db.com\',\n        port            : 12345,\n        service         : \'myother.db.com\'\n      };\n\n\n//---- CloneEngine Options----\nconst OVERWRITE_FOR_ALL_OPS = \'yes\'; // allows CloneEngine to delete existing (Destination Db) table and replace with new one\nconst TIMEZONE = \'local\'; // uses ISO Standard Timestamp... choose either \'utc\' or \'local\'\nconst DISPLAY_MESSAGES_ON_CONSOLE = \'yes\'; // configures CloneEngine messages to display on console\nconst RUN_TYPE = \'synchronous\'; // choose to run operations either "synchronous" (synchronously) or "asynchronous" (asynchronously)\nconst STOP_ON_ERROR = \'yes\'; // when running synchronously... upon an error: if \'yes\' is selected, no further operations will be run\n\n\n/////////////////////////////////////////////// CLONEENGINE LOGIC /////////////////////////////////////////////\n\n//--------------- Handle emitter output messages---------\n//templates for handling output from cloneEngine emitters\nvar handleEmitterOutput = function(msg){\n\n  //configure output message on console...\n  if (DISPLAY_MESSAGES_ON_CONSOLE === \'yes\') {\n    if(msg.msgType === \'operation\'){console.log(msg);}\n    else if(msg.msgType === \'ERROR!\'){\n      //Error just adds a red font\n      console.log(\n        msg.activityId +\' \'+msg.operationId+\' \'+msg.step+\' \'+msg.operation+\' \\x1b[31m\'+msg.msgType+\'\\x1b[0m\'+\' \'+msg.time+\' => \'+msg.description);\n    }else{\n      console.log(\n        msg.activityId +\' \'+msg.operationId+\' \'+msg.step+\' \'+msg.operation+\' \'+msg.msgType+\' \'+msg.time+\' => \'+msg.description);\n    }\n  }\n};\n\n//----------------- Create a Clone Engine---------------\nfunction runCloneEngineOperation (plan) {\n\n  //initialize a new cloning engine\n  let engine = new CloneEngine(SOURCE_DB,DESTINATION_DB,TIMEZONE);\n\n  //configure CloneEngine listiners and how to handle outputs\n  engine.on(\'start\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'connection\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'rowsToProcess\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'process\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'countsMatch\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'finish\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'ERROR!\',function(msg){handleEmitterOutput(msg);})\n  engine.on(\'operation\',function(msg){handleEmitterOutput(msg);})\n\n  //run engine\n  engine.run(plan);\n\n  //upon completion of operation resolve promise\n  return new Promise(function(resolve, reject){\n    STOP_ON_ERROR == \'no\' ?\n      engine.on(\'ERROR!\',function(msg){if (msg){resolve(msg);}}) :\n      engine.on(\'ERROR!\',function(msg){if (msg){reject(msg);}})\n    engine.on(\'finish\',function(msg){if (msg) {resolve(true);}})\n  })\n};\n\n\n////////////////////////////////////// RUN ENGINE OPERATIONS ////////////////////////////////////\n\n//Run CloneEngine Operations (synchronously)...\nif (RUN_TYPE === \'synchronous\') {\n\n  runCloneEngineOperation({\n    sourceTableName                     : \'table1\',\n    destinationTableName                : \'clone_a\',\n    overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n  .then(function(){\n    runCloneEngineOperation({\n      sourceTableName                     : \'table2\',\n      destinationTableName                : \'clone_b\',\n      overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n  .then(function(){\n    runCloneEngineOperation({\n      sourceTableName                     : \'table3\',\n      destinationTableName                : \'clone_c\',\n      overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n  .then(function(){\n    runCloneEngineOperation({\n      sourceTableName                     : \'table4\',\n      destinationTableName                : \'clone_d\',\n      overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n  }).catch(function(err){console.log(err);})\n  }).catch(function(err){console.log(err);})\n  }).catch(function(err){console.log(err);});\n}\n\n//Run CloneEngine Operations (asynchronously)...\nif (RUN_TYPE === \'asynchronous\') {\n\n  runCloneEngineOperation({\n    sourceTableName                     : \'table1\',\n    destinationTableName                : \'clone_a\',\n    overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n\n  runCloneEngineOperation({\n    sourceTableName                     : \'table2\',\n    destinationTableName                : \'clone_b\',\n    overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n\n  runCloneEngineOperation({\n    sourceTableName                     : \'table3\',\n    destinationTableName                : \'clone_c\',\n    overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n\n  runCloneEngineOperation({\n    sourceTableName                     : \'table4\',\n    destinationTableName                : \'clone_d\',\n    overwriteDestTblIfExists            : OVERWRITE_FOR_ALL_OPS\n  })\n}\n\n```\n-\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '602b3c8aaaf72a1cfb4f2f5b6f33aa5d62fc41f4',
+21 silly publish   bugs: { url: 'https://github.com/dmaciejewski1/CloneEngine/issues' },
+21 silly publish   homepage: 'https://github.com/dmaciejewski1/CloneEngine#readme',
+21 silly publish   _id: 'cloneengine@0.0.1',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'ee4a389bc28bdfa5c601862fec27f3127170bf36',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name cloneengine
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'cloneengine',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'cloneengine',
+26 silly mapToRegistry   name: 'cloneengine',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/cloneengine
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/dmacieje/.npm/cloneengine/0.0.1/package.tgz
+30 verbose request uri https://registry.npmjs.org/cloneengine
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 1:59:11 PM
+33 verbose request using bearer token for auth
+34 verbose request id 61146bcf27f8594b
+35 http request PUT https://registry.npmjs.org/cloneengine
+36 http 403 https://registry.npmjs.org/cloneengine
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Fri, 18 Nov 2016 21:59:11 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-sjc3628-SJC',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1479506351.558946,VS0,VE151',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/dmacieje/.npm/registry.npmjs.org/cloneengine on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 0.0.1." : cloneengine
+40 verbose stack     at makeError (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:1044:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/Users/dmacieje/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:965:12)
+41 verbose statusCode 403
+42 verbose pkgid cloneengine
+43 verbose cwd /Users/dmacieje/publish/CloneEngine
+44 error Darwin 14.5.0
+45 error argv "/Users/dmacieje/node/v6.9.1/bin/node" "/Users/dmacieje/node/v6.9.1/bin/npm" "publish"
+46 error node v6.9.1
+47 error npm  v3.10.8
+48 error code E403
+49 error "You cannot publish over the previously published version 0.0.1." : cloneengine
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
