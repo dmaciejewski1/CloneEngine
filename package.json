@@ -1,5 +1,5 @@
 {
-  "name": "cloneEngine",
+  "name": "cloneengine",
   "version": "0.0.1",
   "description": "Cast multiple tables (from a Postgres source) as comparable Oracle Tables (or rebuild existing ones) and load with source data all while ETL is run both in-memory, and asynchronously (when run with other clonning operations at the same time).",
   "author": {
