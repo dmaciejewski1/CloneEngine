@@ -36,7 +36,8 @@ A tool for cloning database tables; from Postgres into Oracle
   - Oracle Instant Client installed and configured on local machine
 
 ### Add-ons:
-  - CloneLogger
+  - CloneLogger: Create and Maintain Log Tables for the CloneEngine Module
+  - https://www.npmjs.com/package/clonelogger
 
 ### Data Type Conversions:
 
