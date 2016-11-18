@@ -1,0 +1,20 @@
+{
+  "name": "cloneEngine",
+  "version": "0.0.1",
+  "description": "Cast multiple tables (from a Postgres source) as comparable Oracle Tables (or rebuild existing ones) and load with source data all while ETL is run both in-memory, and asynchronously (when run with other clonning operations at the same time).",
+  "author": {
+    "name"  :"David Maciejewski",
+    "email" :"dmaciejewski1@gmail.com"
+  },
+  "main" : "app.js",
+  "repository" : {
+    "type" : "git",
+    "url"  : "https://github.com/dmaciejewski1/CloneEngine.git"
+  },
+  "license": "MIT",
+   "keywords": ["data", "database", "Db", "DB", "db", "layer", "node", "warehouse", "information","transaction", "metrics", "connect", "connection", "connectivity", "business", "mine", "mining","SQL", "PLSQL", "PL/SQL", "select", "insert", "statements", "query", "queries", "querying", "clauses", "ETL", "client", "add-on","API", "web-API", "webAPI", "plugin", "plug-in", "tool", "driver", "library", "module", "oracledb", "oracle","ora", "OCI", "10g", "11g","12c","postgres","pg"],
+  "dependencies": {
+    "pg": "^6.1.0",
+    "oracledb": "^1.11.0"
+    }
+}
