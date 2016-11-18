@@ -1,5 +1,5 @@
 # CloneEngine
-A simple tool for cloning database tables; from Postgres into Oracle
+A tool for cloning database tables; from Postgres into Oracle
 
 ### Summary:
   - Cast one or multiple tables (from a Postgres source) as comparable Oracle
@@ -34,6 +34,9 @@ A simple tool for cloning database tables; from Postgres into Oracle
 
 ### Requirements:
   - Oracle Instant Client installed and configured on local machine
+
+### Add-ons:
+  - CloneLogger
 
 ### Data Type Conversions:
 
@@ -112,7 +115,7 @@ ln -s ~/oracle/instantclient_12_1/libocci.dylib.12.1 ~/oracle/instantclient_12_1
 
 #### *C) CloneEngine Installation*
 ```
-npm cloneengine
+npm install cloneengine
 ```
 
 
@@ -263,3 +266,4 @@ if (RUN_TYPE === 'asynchronous') {
 }
 
 ```
+-

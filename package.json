@@ -1,7 +1,7 @@
 {
   "name": "cloneengine",
   "version": "0.0.1",
-  "description": "Cast multiple tables (from a Postgres source) as comparable Oracle Tables (or rebuild existing ones) and load with source data all while ETL is run both in-memory, and asynchronously (when run with other clonning operations at the same time).",
+  "description": "A simple tool for cloning database tables; from Postgres to Oracle",
   "author": {
     "name"  :"David Maciejewski",
     "email" :"dmaciejewski1@gmail.com"
