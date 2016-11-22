@@ -4,10 +4,10 @@ A tool for cloning database tables; from Postgres into Oracle
 ### Summary:
   - Cast one or multiple tables (from a Postgres source) as comparable Oracle
   Tables (or rebuild existing ones). Cloning Operations are run in-memory,
-  and can be configured to be run asynchronously or synchronously.
+  and can be configured to run either asynchronously or synchronously.
 
 ### Usage:
-  - This module is purposed to clone SMALLER data tables from within a Postgres
+  - This module is purposed to clone data tables from within a Postgres
   database environment into an Oracle database environment. The process used
   does not write to file, but rather stores entire tables in memory while
   offloading the data into Oracle. Size your cloning operations accordingly.
@@ -17,27 +17,23 @@ A tool for cloning database tables; from Postgres into Oracle
   it may be necessary to run only one cloning operation at a time (i.e.
   synchronously rather than asynchronously).
 
-### Limitations:
-  - As a guide, expect a simple laptop to handle realistically between 2 to 10
-  Gb of data (that being the total amount of data to be cloned during
-  run-time event) in a timely manner. Needless to say, a more robust system
-  could handle much more than that.
+### Things to keep in mind:
+  - As a guide, expect a laptop to handle realistically between 2 to 10
+  Gb of data. That being the maximum amount of data run per cloning operation. As
+  clone operations can be configured to run either synchronously or asynchronously,
+  running a large number of larger sized operations asynchronously could quickly
+  overwhelm a small system or network.
   - While CloneEngine tries to be responsible handling database connection
   closures, keep in mind the more cloning operations running asynchronously,
   the more database connections that are opened against a database. Each
   database has limits with the amount of connections that it can have open at
-  one time. As CloneEngine offloads data, database connections will remain open
-  per cloning operation (and most likely for some time) until the data
-  offloading process is complete for that operation. Also keep in mind that
-  connection time can quickly increase as resources are stretched handling larger
-  operations asynchronously.
+  one time. As CloneEngine offloads data, database connections remain open
+  per cloning operation until the data offloading process is complete for that
+  operation. Also keep in mind that connection time can quickly increase as
+  resources are stretched handling larger operations asynchronously.
 
 ### Requirements:
   - Oracle Instant Client installed and configured on local machine
-
-### Add-ons:
-  - CloneLogger: Create and Maintain Log Tables for the CloneEngine Module
-  - https://www.npmjs.com/package/clonelogger
 
 ### Data Type Conversions:
 
@@ -45,14 +41,14 @@ A tool for cloning database tables; from Postgres into Oracle
   Data Types
 
 
-  | Postgres Data Type | Oracle Data Type  |
-  |--------------------|-------------------|
-  |       varchar      |     varchar2      |
-  |       numeric      |      number       |
-  |        int4        |     integer       |
-  |      timestamp     |     varchar2      |
-  |        bool        |     varchar2      |
-  |        text        |     varchar2      |
+| Postgres Type | Oracle Type |
+|---------------|-------------|
+|   varchar     |  varchar2   |
+|   numeric     |   number    |
+|    int4       |  integer    |
+|  timestamp    |  varchar2   |
+|    bool       |  varchar2   |
+|    text       |  varchar2   |
 
 ### Message/Feedback Emitters:
 
@@ -62,8 +58,9 @@ A tool for cloning database tables; from Postgres into Oracle
 |---------------|-------------------------------------------------------|----------|
 |    start      | Emits on start only                                   | activity |
 |  connection   | Emits when connection is opened or closed             | activity |
-| rowsToProcess | Emits the row count of the table to be cloned         | activity |
+| rowsToProcess | Emits the row count number of the table to be cloned  | activity |
 |   process     | Emits when data is being processed                    | activity |
+|  bytesCached  | Emits the number of bytes cashed                      | activity |
 |  countsMatch  | Emits true if source and destination row counts match | activity |
 |    finish     | Emits on finish only                                  | activity |
 |   operation   | Emits a summary of operation only                     | summary  |
@@ -116,7 +113,7 @@ ln -s ~/oracle/instantclient_12_1/libocci.dylib.12.1 ~/oracle/instantclient_12_1
 
 #### *C) CloneEngine Installation*
 ```
-npm install cloneengine
+npm cloneengine
 ```
 
 
@@ -150,9 +147,9 @@ const DESTINATION_DB = {// must have read, write, delete permissions
 
 //---- CloneEngine Options----
 const OVERWRITE_FOR_ALL_OPS = 'yes'; // allows CloneEngine to delete existing (Destination Db) table and replace with new one
-const TIMEZONE = 'local'; // uses ISO Standard Timestamp... choose either 'utc' or 'local'
+const TIMEZONE = 'local'; // uses ISO Standard Timestamp... choose either "utc" or "local"
 const DISPLAY_MESSAGES_ON_CONSOLE = 'yes'; // configures CloneEngine messages to display on console
-const RUN_TYPE = 'synchronous'; // choose to run operations either "synchronous" (synchronously) or "asynchronous" (asynchronously)
+const RUN_TYPE = 'synchronous'; // choose to run operations either "synchronous" or "asynchronous"
 const STOP_ON_ERROR = 'yes'; // when running synchronously... upon an error: if 'yes' is selected, no further operations will be run
 
 
@@ -182,11 +179,12 @@ function runCloneEngineOperation (plan) {
   //initialize a new cloning engine
   let engine = new CloneEngine(SOURCE_DB,DESTINATION_DB,TIMEZONE);
 
-  //configure CloneEngine listiners and how to handle outputs
+  //configure CloneEngine listeners and how to handle outputs
   engine.on('start',function(msg){handleEmitterOutput(msg);})
   engine.on('connection',function(msg){handleEmitterOutput(msg);})
   engine.on('rowsToProcess',function(msg){handleEmitterOutput(msg);})
   engine.on('process',function(msg){handleEmitterOutput(msg);})
+  engine.on('bytesCached',function(msg){handleEmitterOutput(msg);})
   engine.on('countsMatch',function(msg){handleEmitterOutput(msg);})
   engine.on('finish',function(msg){handleEmitterOutput(msg);})
   engine.on('ERROR!',function(msg){handleEmitterOutput(msg);})
@@ -267,4 +265,3 @@ if (RUN_TYPE === 'asynchronous') {
 }
 
 ```
--
