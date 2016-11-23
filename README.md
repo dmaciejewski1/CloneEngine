@@ -35,6 +35,11 @@ A tool for cloning database tables; from Postgres into Oracle
 ### Requirements:
   - Oracle Instant Client installed and configured on local machine
 
+### Add-on Modules:
+  - CloneLogger : Create and Maintain Log Tables for CloneEngine
+  - https://www.npmjs.com/package/clonelogger
+
+
 ### Data Type Conversions:
 
   - Currently resolves the following Postgres data types to the following Oracle
@@ -113,7 +118,7 @@ ln -s ~/oracle/instantclient_12_1/libocci.dylib.12.1 ~/oracle/instantclient_12_1
 
 #### *C) CloneEngine Installation*
 ```
-npm cloneengine
+npm install cloneengine
 ```
 
 
